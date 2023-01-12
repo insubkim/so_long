@@ -25,8 +25,11 @@ char    *ft_strjoin_free(char *s1, char *s2)
         if (!p)
                 return (0);
         i = 0;
-        while (s1 && *s1)
-                p[i++] = *s1++;
+        while (s1 && s1[i])
+        {
+                p[i] = s1[i];
+                i++;
+        }
         while (*s2)
                 p[i++] = *s2++;
         p[i] = 0;

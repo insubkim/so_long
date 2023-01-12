@@ -6,7 +6,7 @@
 /*   By: inskim <inskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:18:31 by inskim            #+#    #+#             */
-/*   Updated: 2023/01/12 20:58:08 by inskim           ###   ########.fr       */
+/*   Updated: 2023/01/12 22:01:42 by inskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,24 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
+
+typedef struct s_vertax
+{
+    int x;
+    int y;
+}   t_vertax;
+
+typedef struct s_adjacency_arr
+{
+    t_vertax    *vertax_arr[4];
+}   t_adjacency_arr;
+
+typedef struct s_graph
+{
+    t_vertax  *vertax_arr;
+    int vertax_count;
+    t_adjacency_arr *adjacency_arr;
+}   t_graph;
 
 void    handle_error(int error_reason);
 char    *check_file_name(char *file_name);

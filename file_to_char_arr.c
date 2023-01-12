@@ -16,7 +16,7 @@ int ft_read(int fd, char buf[], int read_size)
 {
     int read_bytes;
 
-    read_bytes = ft_read(fd, buf, read_size);
+    read_bytes = read(fd, buf, read_size);
     if (read_bytes < 0)
         handle_error(READ_ERROR);
     return (read_bytes);
@@ -34,7 +34,7 @@ char    *read_map_file(int fd)
     {
         read_bytes = ft_read(fd, buf, 1023);
         buf[read_bytes] = 0;
-        ft_strjoin_free(map_data, buf);
+        map_data = ft_strjoin_free(map_data, buf);
     }
     return (map_data);
 }

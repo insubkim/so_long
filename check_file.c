@@ -28,7 +28,7 @@ char    *check_file_name(char *file_name)
     char    *format;
 
     format = ft_strrchr(file_name, '.');
-    if (!format || !ft_strcmp(format, ".ber"))
+    if (!format || ft_strcmp(format, ".ber"))
         handle_error(WRONG_FORMAT);
     return (file_name);
 }
@@ -56,32 +56,30 @@ void    get_width_height(char **map_arr, int *width, int *height)
 
 void    check_body(char **map_arr)
 {
-    int player;
-    int collectible;
-    int exit;
+    int p_c_e[3];
     int i;
 
-    player = 0;
-    collectible = 0;
-    exit = 0;
-    while (*map_arr)
+    p_c_e[0] = 0;
+    p_c_e[1] = 0;
+    p_c_e[2] = 0;
+    while (*(map_arr + 1))
     {
         i = 0;
         while ((*map_arr)[i])
         {
             if ((*map_arr)[i] == 'P')
-                player++;
-            else if ((*map_arr)[i] == 'E')
-                exit++;
+                p_c_e[0]++;
             else if ((*map_arr)[i] == 'C')
-                collectible++;
+                p_c_e[1]++;
+            else if ((*map_arr)[i] == 'E')
+                p_c_e[2]++;
             else if (!((*map_arr)[i] == '1' || (*map_arr)[i] == '0'))
                 handle_error(MAP_ERROR);
             i++;
         }
         map_arr++;
     }
-    if (player != 1 || collectible == 0 || exit != 1)
+    if (p_c_e[0] != 1 || p_c_e[2] == 0 || p_c_e[2] != 1)
         handle_error(MAP_ERROR);
 }
 
@@ -89,32 +87,20 @@ void    check_map(char *map_data, char **map_arr)
 {
     int width;
     int height;
-    //null check
+    
     if (!map_arr || !map_arr)
         handle_error(MAP_ERROR);
-    //width > 2 , height > 2 체크
     get_width_height(map_arr, &width, &height);
     if (width < 3 || height < 3)
         handle_error(MAP_ERROR);
-    //map data 마지막 \n 있는지 체크
-    if (!(char *)(ft_strrchr(map_data, '\n') + 1))
+    if (map_data[ft_strlen(map_data) - 1] != '\n')
         handle_error(MAP_ERROR);
-    free(map_data);    
-    //free map data
-    //1line all wall
+    free(map_data);
     while (*map_arr[0])
         if (*(map_arr[0])++ != '1')
             handle_error(MAP_ERROR);
-    while (height)
-    //2 ~ last -l line 
-    //first is wall last is wall
-    //other is o l c p e
-    //count c p e
-    //c is > 0
-    //p and e is 1
     check_body(++map_arr);
-    //last is wall
     while (*map_arr[height - 1])
-        if (*(map_arr[0])++ != '1')
+        if (*(map_arr[height - 1])++ != '1')
             handle_error(MAP_ERROR);
 }
