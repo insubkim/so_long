@@ -6,7 +6,7 @@
 /*   By: inskim <inskim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:18:31 by inskim            #+#    #+#             */
-/*   Updated: 2023/01/21 18:50:24 by inskim           ###   ########.fr       */
+/*   Updated: 2023/01/21 18:53:17 by inskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,10 @@ int cur_x, int cur_y, int mov_x, int mov_y)
     }
     else if (map_arr[mov_y][mov_x] == 'E')
     {
-        if (no_more_c(map_arr, 'C'))
-            handle_close(mlx_info);            
         map_arr[mov_y][mov_x] = 'P';
+        fill_window(mlx_info);
+        if (no_more_c(map_arr, 'C'))
+            handle_close(mlx_info);
     }
     else
         map_arr[cur_y][cur_x] = 'P';
