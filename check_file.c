@@ -12,17 +12,6 @@
 
 #include "so_long.h"
 
-char    *ft_strrchr(const char *s, int c)
-{
-        int     i;
-
-        i = ft_strlen(s);
-        while (i >= 0)
-                if (s[i--] == (char)c)
-                        return ((char *)&(s[++i]));
-        return (0);
-}
-
 char    *check_file_name(char *file_name)
 {
     char    *format;
@@ -79,8 +68,22 @@ void    check_body(char **map_arr)
         }
         map_arr++;
     }
-    if (p_c_e[0] != 1 || p_c_e[2] == 0 || p_c_e[2] != 1)
+    if (p_c_e[0] != 1 || p_c_e[1] == 0 || p_c_e[2] != 1)
         handle_error(MAP_ERROR);
+}
+
+void    check_wall(char **s, int width, int height)
+{
+    int i;
+
+    i = -1;
+    while (++i < width)
+        if (s[0][i] != '1' || s[height - 1][i] != '1')
+            handle_error(MAP_ERROR);
+    i = -1;
+    while (++i < height)
+        if (s[i][0] != '1' || s[i][width - 1] != '1')
+            handle_error(MAP_ERROR);
 }
 
 void    check_map(char *map_data, char **map_arr)
@@ -96,11 +99,6 @@ void    check_map(char *map_data, char **map_arr)
     if (map_data[ft_strlen(map_data) - 1] != '\n')
         handle_error(MAP_ERROR);
     free(map_data);
-    while (*map_arr[0])
-        if (*(map_arr[0])++ != '1')
-            handle_error(MAP_ERROR);
-    check_body(++map_arr);
-    while (*map_arr[height - 1])
-        if (*(map_arr[height - 1])++ != '1')
-            handle_error(MAP_ERROR);
+    check_wall(map_arr, width, height);
+    check_body(map_arr + 1);
 }

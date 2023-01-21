@@ -26,8 +26,9 @@ void    handle_error(int error_reason)
         write(2, "malloc() error\n", ft_strlen("malloc() error\n"));
     else if (READ_ERROR == error_reason)
         write(2, "read() error\n", ft_strlen("read() error\n"));
-     else if (MAP_ERROR == error_reason)
+    else if (MAP_ERROR == error_reason)
         write(2, "map error\n", ft_strlen("map error\n"));
-        
+    else if (NO_PATH_ERROR == error_reason)
+        write(2, "no path error\n", ft_strlen("no path error\n"));    
     exit(0);
 }

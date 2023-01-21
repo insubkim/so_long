@@ -55,3 +55,13 @@ char    **file_to_char_arr(char file_name[])
     check_map(map_data, map_arr);
     return (map_arr);
 }
+
+void    free_arr(char **arr)
+{
+    int i;
+
+    i = 0;
+    while (arr[i])
+        free(arr[i++]);
+    free(arr);
+}

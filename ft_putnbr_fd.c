@@ -1,29 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: inskim <inskim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 19:18:31 by inskim            #+#    #+#             */
-/*   Updated: 2023/01/21 15:38:02 by inskim           ###   ########.fr       */
+/*   Created: 2022/07/18 19:22:11 by inskim            #+#    #+#             */
+/*   Updated: 2023/01/21 17:40:06 by inskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int main(int argc, char *argv[])
+static int	is_min(int nb, int fd)
 {
-    char    **map_arr;
-    t_graph *map_graph;
+	if (nb >= 0)
+		return (0);
+	write(fd, "-", 1);
+	return (1);
+}
 
-    if (argc != 2)
-        handle_error(ARGC_NUM_ERROR);
-    map_arr = file_to_char_arr(check_file_name(argv[1]));
-    map_graph = make_graph(map_arr);
-    check_path(map_graph, map_arr);
-    make_game(map_arr, map_graph);
-    free_arr(map_arr);
-    free_graph(map_graph);
-    return (0);
+static void	print(unsigned int u_nb, int fd)
+{
+	if (u_nb >= 10)
+	{
+		print(u_nb / 10, fd);
+		u_nb = u_nb % 10;
+	}
+	u_nb = u_nb + 48;
+	write(fd, &u_nb, 1);
+}
+
+void	ft_putnbr_fd(int nb, int fd)
+{
+	unsigned int	u_nb;
+
+	if (is_min(nb, fd) == 1)
+		u_nb = -nb;
+	else
+		u_nb = nb;
+	print(u_nb, fd);
 }

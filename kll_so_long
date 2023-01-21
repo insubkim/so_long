@@ -1,1 +1,0 @@
-ps | grep "so_long" | awk '{print $1}' | xargs kill

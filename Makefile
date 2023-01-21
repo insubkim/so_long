@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: inskim <inskim@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: inskim <inskim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 08:02:44 by inskim            #+#    #+#              #
-#    Updated: 2023/01/12 21:14:36 by inskim           ###   ########.fr        #
+#    Updated: 2023/01/21 17:42:02 by inskim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,23 +16,18 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra -g
 
-SRC = check_file.c file_to_char_arr.c ft_strjoin_free.c handle_error.c main.c ft_split.c ft_str.c
+SRC = check_file.c file_to_char_arr.c ft_strjoin_free.c handle_error.c main.c ft_split.c ft_str.c graph.c make_graph.c queue.c check_path.c make_game.c handle_key.c ft_putnbr_fd.c
 OBJ = $(SRC:.c=.o)
 HEADER = so_long.h
-MLX_DIR = ./mlx_linux
+MLX_DIR = ./mlx
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I$(MLX_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
-
 $(NAME): $(OBJ) $(HEADER)
-	$(CC) $(OBJ) -L$(MLX_DIR) -L/usr/lib -lmlx -lX11 -lm -lz -o $(NAME)
-
-
-$(NAMEs): $(OBJ) $(HEADER)
-	$(CC) $(OBJ) -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -o $(NAME) 
 
 clean:
 	rm -f $(OBJ)
