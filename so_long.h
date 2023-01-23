@@ -6,7 +6,7 @@
 /*   By: inskim <inskim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:18:31 by inskim            #+#    #+#             */
-/*   Updated: 2023/01/24 00:35:35 by inskim           ###   ########.fr       */
+/*   Updated: 2023/01/24 00:37:21 by inskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct s_mlx_info
 	void		*mlx;
 	void		*window;
 	int			move_count;
-	int			face_status;
 }	t_mlx_info;
 
 void			handle_error(int error_reason);

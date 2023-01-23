@@ -6,7 +6,7 @@
 /*   By: inskim <inskim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:18:31 by inskim            #+#    #+#             */
-/*   Updated: 2023/01/24 00:15:44 by inskim           ###   ########.fr       */
+/*   Updated: 2023/01/24 00:37:27 by inskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_mlx_info	*init_mlx_info(t_map_info *map_info)
 	mlx_info -> window = mlx_new_window(mlx_info ->mlx, \
 			(map_info -> width) * 50, (map_info -> height) * 50, "so_long");
 	mlx_info -> move_count = 0;
-	mlx_info -> face_status = 0;
 	return (mlx_info);
 }
 
