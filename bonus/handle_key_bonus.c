@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_key.c                                       :+:      :+:    :+:   */
+/*   handle_key_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: inskim <inskim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:18:31 by inskim            #+#    #+#             */
-/*   Updated: 2023/01/24 01:06:36 by inskim           ###   ########.fr       */
+/*   Updated: 2023/01/24 04:12:32 by inskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	get_player_coord(t_mlx_info *mlx_info, int *p_x, int *p_y)
 {
@@ -58,6 +58,8 @@ void	move_player(t_mlx_info *mlx_info, \
 	char	**map_arr;
 
 	map_arr = mlx_info -> map_info -> map_arr;
+	if (map_arr[mov_y][mov_x] == 'X')
+		handle_close(mlx_info);
 	map_arr[coord[1]][coord[0]] = '0';
 	if (no_more_c(map_arr, 'E'))
 		map_arr[coord[1]][coord[0]] = 'E';
@@ -96,12 +98,11 @@ int	handle_key(int keycode, t_mlx_info *mlx_info)
 {
 	if ((0 <= keycode && keycode <= 2) || keycode == 13)
 	{
-		ft_putnbr_fd(++(mlx_info -> move_count), 1);
-		write(1, "\n", 1);
 		set_map_arr(keycode, mlx_info);
 		mlx_info -> pressed_key_code = keycode;
 		mlx_info -> sprite_flag = 0;
 		fill_window(mlx_info);
+		mlx_info -> move_count++;
 		mlx_string_put(mlx_info -> mlx, mlx_info -> window, 25, 25, \
 			0x0000ff00, ft_itoa(mlx_info->move_count));
 	}

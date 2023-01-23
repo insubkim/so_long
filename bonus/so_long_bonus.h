@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: inskim <inskim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:18:31 by inskim            #+#    #+#             */
-/*   Updated: 2023/01/24 01:56:14 by inskim           ###   ########.fr       */
+/*   Updated: 2023/01/24 04:19:15 by inskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 # define ARGC_NUM_ERROR 0
 # define WRONG_FORMAT 1
 # define CANNOT_READ_FILE 2
@@ -102,5 +102,6 @@ char			*ft_itoa(int n);
 int				handle_close(t_mlx_info *mlx_info);
 void			get_player_coord(t_mlx_info *mlx_info, int *p_x, int *p_y);
 int				animation(t_mlx_info *mlx_info);
+void			*get_image(t_mlx_info *mlx_info, int x, int y);
 
 #endif
