@@ -6,7 +6,7 @@
 /*   By: inskim <inskim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:18:31 by inskim            #+#    #+#             */
-/*   Updated: 2023/01/24 12:30:53 by inskim           ###   ########.fr       */
+/*   Updated: 2023/01/24 12:32:55 by inskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	move_player(t_mlx_info *mlx_info, \
 	char	**map_arr;
 
 	map_arr = mlx_info -> map_info -> map_arr;
-	if (map_arr[mov_y][mov_x] == 'X')
+	if (map_arr[mov_y][mov_x] == 'X' || map_arr[mov_y][mov_x] == 'x')
 		handle_close(mlx_info);
 	map_arr[coord[1]][coord[0]] = '0';
 	if (no_more_c(map_arr, 'E'))
@@ -67,8 +67,6 @@ void	move_player(t_mlx_info *mlx_info, \
 		map_arr[mov_y][mov_x] = 'P';
 	else if (map_arr[mov_y][mov_x] == 'C')
 		map_arr[mov_y][mov_x] = 'P';
-	else if (map_arr[mov_y][mov_x] == 'X')
-		handle_close(mlx_info);
 	else if (map_arr[mov_y][mov_x] == 'E')
 	{
 		map_arr[mov_y][mov_x] = 'P';
