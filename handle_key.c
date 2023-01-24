@@ -6,7 +6,7 @@
 /*   By: inskim <inskim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:18:31 by inskim            #+#    #+#             */
-/*   Updated: 2023/01/24 01:06:36 by inskim           ###   ########.fr       */
+/*   Updated: 2023/01/24 12:30:20 by inskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	set_map_arr(int keycode, t_mlx_info *mlx_info)
 
 int	handle_key(int keycode, t_mlx_info *mlx_info)
 {
+	char	*str;
+
 	if ((0 <= keycode && keycode <= 2) || keycode == 13)
 	{
 		ft_putnbr_fd(++(mlx_info -> move_count), 1);
@@ -102,8 +104,10 @@ int	handle_key(int keycode, t_mlx_info *mlx_info)
 		mlx_info -> pressed_key_code = keycode;
 		mlx_info -> sprite_flag = 0;
 		fill_window(mlx_info);
+		str = ft_itoa(mlx_info->move_count);
 		mlx_string_put(mlx_info -> mlx, mlx_info -> window, 25, 25, \
-			0x0000ff00, ft_itoa(mlx_info->move_count));
+			0x0000ff00, str);
+		free(str);
 	}
 	else if (keycode == 53)
 		handle_close(mlx_info);
