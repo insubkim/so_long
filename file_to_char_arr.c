@@ -6,7 +6,7 @@
 /*   By: inskim <inskim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:18:31 by inskim            #+#    #+#             */
-/*   Updated: 2023/01/23 23:52:38 by inskim           ###   ########.fr       */
+/*   Updated: 2023/02/22 00:33:12 by inskim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ char	*read_map_file(int fd)
 	return (map_data);
 }
 
+int	has_consequtive_newline(char *map_data)
+{
+	while (*map_data)
+		if (*map_data++ == '\n' && *map_data == '\n')
+			return (1);
+	return (0);
+}
+
 char	**file_to_char_arr(char file_name[])
 {
 	int		fd;
@@ -49,6 +57,8 @@ char	**file_to_char_arr(char file_name[])
 	if (fd < 0)
 		handle_error(CANNOT_READ_FILE);
 	map_data = read_map_file(fd);
+	if (has_consequtive_newline(map_data))
+		handle_error(MAP_ERROR);
 	map_arr = ft_split(map_data, '\n');
 	if (!map_arr)
 		handle_error(MALLOC_ERROR);
